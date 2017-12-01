@@ -4,18 +4,37 @@ const $ = require('jquery');
 const Peer =require('peerjs');
 const playStream = require('./playVideo');
 const uid = require ('uid')
+const socket = io('http://localhost:3000');
+//const config= {host: 'kkksstream.herokuapp.com', port:443, secure: true , key:'peerjs' };
 
-const config= {host: 'kkksstream.herokuapp.com', port:443, secure: true , key:'peerjs' };
-
-function getPeer(){
+socket.on("DANH_SACH_ONLINE", arrUserInfor =>{
+        arrUserInfor.forEach(user => {
+                const {ten ,peerID} =user;
+                $('#ulUser').append(`<li id="${peerID}">${ten}</li>`);
+        });
+        socket.on("CO_NGUOI_DUNG_MOI", user => {
+                const { ten, peerID } = user;
+                $('#ulUser').append(`<li id="${peerID}">${ten}</li>`);
+        })
+});
+socket.on("DANG_KY_THAT_BAI",() => alert("DKY THAT BAI"));
+/* function getPeer(){
     const id= uid(10);
     $('#peer-id').append(id);
     return id;
-}
+} */
 
-const peer = Peer(getPeer(), config);
+//const peer = Peer(getPeer(), config);
+var peer = new Peer({ key: '0368xkourz4cxr' });
 
+peer.on('open', id =>{
+        $('#my-peer').append(id);
+        $("#btnSignUp").click(() => {
+                        const username = $('#txtUsername').val();
+                        socket.emit("NGUOI_DUNG_DANG_KY", {ten:username, peerID: id});
+                });
 
+});
 
 //Caller
 $('#btnCall').click(() =>{

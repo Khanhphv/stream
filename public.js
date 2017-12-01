@@ -11824,18 +11824,37 @@ const $ = __webpack_require__(4);
 const Peer =__webpack_require__(10);
 const playStream = __webpack_require__(3);
 const uid = __webpack_require__ (16)
+const socket = io('http://localhost:3000');
+//const config= {host: 'kkksstream.herokuapp.com', port:443, secure: true , key:'peerjs' };
 
-const config= {host: 'kkksstream.herokuapp.com', port:443, secure: true , key:'peerjs' };
-
-function getPeer(){
+socket.on("DANH_SACH_ONLINE", arrUserInfor =>{
+        arrUserInfor.forEach(user => {
+                const {ten ,peerID} =user;
+                $('#ulUser').append(`<li id="${peerID}">${ten}</li>`);
+        });
+        socket.on("CO_NGUOI_DUNG_MOI", user => {
+                const { ten, peerID } = user;
+                $('#ulUser').append(`<li id="${peerID}">${ten}</li>`);
+        })
+});
+socket.on("DANG_KY_THAT_BAI",() => alert("DKY THAT BAI"));
+/* function getPeer(){
     const id= uid(10);
     $('#peer-id').append(id);
     return id;
-}
+} */
 
-const peer = Peer(getPeer(), config);
+//const peer = Peer(getPeer(), config);
+var peer = new Peer({ key: '0368xkourz4cxr' });
 
+peer.on('open', id =>{
+        $('#my-peer').append(id);
+        $("#btnSignUp").click(() => {
+                        const username = $('#txtUsername').val();
+                        socket.emit("NGUOI_DUNG_DANG_KY", {ten:username, peerID: id});
+                });
 
+});
 
 //Caller
 $('#btnCall').click(() =>{
@@ -11858,6 +11877,7 @@ peer.on('call',call => {
 	});
 });
 
+
 /***/ }),
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -11867,7 +11887,7 @@ const playVideo = __webpack_require__ (3);
 const $ =__webpack_require__(4);
 
 function openCamera(cb){
-  navigator.mediaDevices.getUserMedia({ audio:false, video:true})
+  navigator.mediaDevices.getUserMedia({ audio:true, video:true})
   .then(stream => {
     cb(stream);
     })

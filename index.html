@@ -2,18 +2,39 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Video_Conference</title>
+    <script src="socket.io.js"></script>
+    
+    <style>
+      .video{
+       display: inline-block; 
+      }
+      video #remoteStream{
+        margin-right: 50px;
+
+      }
+    </style>
   </head>
   <body>
-    <h3 id="peer-id"> My peer id:</h3>
-    <video id="localStream" width="500" controls></video>
-    <br></br>
-    <video id="remoteStream" width="300" controls></video>
-    <br></br>
+    <p> Online user:::</p>
+    <ul id="ulUser">
+
+    </ul>
+    <h3 id="my-peer"> My peer id:</h3>
+    <div class="video">
+      <video id="localStream" width="500" controls></video>
+    </div>
+    
+    <div class="video">
+    <video id="remoteStream" width="500" controls></video>
+    </div>
+    <br /></br>
     <button id="btnCall">Call</button>
-    <br></br>
+    <br /></br>
 	  <input type="text" id="remoteId" placeholder="Remote ID">
-		
+    <br /></br>
+    <input type="text" id="txtUsername" placeholder="Enter user name">
+    <button id="btnSignUp">Sign Up</button>
 
   </body>
   <script src="public.js"></script>
