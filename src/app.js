@@ -7,15 +7,24 @@ const uid = require ('uid')
 const socket = io('http://localhost:3000');
 //const config= {host: 'kkksstream.herokuapp.com', port:443, secure: true , key:'peerjs' };
 
+$("#div-chat").hide();
+
 socket.on("DANH_SACH_ONLINE", arrUserInfor =>{
+        $("#div-chat").show();
+        $("#div-dang-ki").hide();
         arrUserInfor.forEach(user => {
                 const {ten ,peerID} =user;
                 $('#ulUser').append(`<li id="${peerID}">${ten}</li>`);
         });
-        socket.on("CO_NGUOI_DUNG_MOI", user => {
+        socket.on('CO_NGUOI_DUNG_MOI', user => {
                 const { ten, peerID } = user;
-                $('#ulUser').append(`<li id="${peerID}">${ten}</li>`);
-        })
+                $("#ulUser").append(`<li id="${peerID}">${ten}</li>`);
+        });
+
+        socket.on('AI_DO_NGAT_KET_NOI', peerID => {
+                //console.log(peerID);
+                $(`#${peerID}`).remove();
+        });
 });
 socket.on("DANG_KY_THAT_BAI",() => alert("DKY THAT BAI"));
 /* function getPeer(){
@@ -56,3 +65,11 @@ peer.on('call',call => {
         call.on('stream', remoteStream=> playStream( remoteStream,'remoteStream'));
 	});
 });
+ $('#ulUser').on('click', 'li', function() {
+        const id =$(this).attr('id'); 
+         openCamera(stream => {
+                 playStream(stream, 'localStream');
+                 const call = peer.call(id, stream);
+                 call.on('stream', remoteStream => playStream(remoteStream, 'remoteStream'));
+         });
+ })

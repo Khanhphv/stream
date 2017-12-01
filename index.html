@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -16,26 +16,29 @@
     </style>
   </head>
   <body>
-    <p> Online user:::</p>
-    <ul id="ulUser">
+    <div id="div-chat"> 
+      <p> Online user :</p>
+      <ul id="ulUser">
 
-    </ul>
-    <h3 id="my-peer"> My peer id:</h3>
-    <div class="video">
-      <video id="localStream" width="500" controls></video>
+      </ul>
+      <h3 id="my-peer"> My peer id:</h3>
+      <div class="video">
+        <video id="localStream" width="500" controls></video>
+      </div>
+      
+      <div class="video">
+      <video id="remoteStream" width="500" controls></video>
+      </div>
+      <br /></br>
+      <button id="btnCall">Call</button>
     </div>
-    
-    <div class="video">
-    <video id="remoteStream" width="500" controls></video>
+    <div id="div-dang-ki">
+      <!-- <br /></br> -->
+      <!-- <input type="text" id="remoteId" placeholder="Remote ID"> -->
+      <br /></br>
+      <input type="text" id="txtUsername" placeholder="Enter user name">
+      <button id="btnSignUp">Sign Up</button>
     </div>
-    <br /></br>
-    <button id="btnCall">Call</button>
-    <br /></br>
-	  <input type="text" id="remoteId" placeholder="Remote ID">
-    <br /></br>
-    <input type="text" id="txtUsername" placeholder="Enter user name">
-    <button id="btnSignUp">Sign Up</button>
-
   </body>
   <script src="public.js"></script>
   
