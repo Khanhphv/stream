@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Video_Conference</title>
+    <script src="socket.io.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+    <link rel="stylesheet" type="text/css" href="layout.css">
+    <script src="socket.io.js"></script>
+    <script src="peer.js"></script>
+    <script src="jquery.js"></script>
+    <style>
+      .video{
+       display: inline-block; 
+      }
+      video #remoteStream{
+        margin-right: 50px;
+
+      }
+    </style>
+  </head>
+  <body style="background: rgb(198, 230, 245);">
+    
+      <div id="div-chat"> 
+        <div id="left" style="background: rgb(198, 230, 245);">
+          <div id ="boxTitle">User online</div>
+          <ul id="ulUser"></ul>
+        </div>
+
+        <div id="right" style="background: rgb(198, 230, 245);">
+          <h3 id="my-peer" style="font-family: Lobster;"> ID:</h3>
+
+          <div id="sayHi">
+            Chat<span id="currentUser"></span>
+            <!-- <input type="button" id="btnLogout" value="Logout"/> -->
+          </div>
+          <div id="listMessages"></div>
+          <input type="text" id="txtMessage"/>
+          <input type="button" id="btnSendMessage" value="Send"/>
+          
+        </div>
+
+        <div id="videos">
+          <div class="video">
+            <video id="localStream" width="500" controls></video>
+          </div>
+      
+          <div class="video">
+            <video id="remoteStream" width="500" controls></video>
+          </div>
+          <br /></br>
+          <!-- <button id="btnCall">Call</button> -->
+        </div>
+      </div>
+      
+      <div id="div-dang-ki">
+      <!-- <br /></br> -->
+      <!-- <input type="text" id="remoteId" placeholder="Remote ID"> -->
+        <br /></br>
+        <input type="text" id="txtUsername" placeholder="Enter user name">
+        <button id="btnSignUp">Sign Up</button>
+      </div>
+    
+  </body>
+  <script src="public.js"></script>
+  
+</html>
